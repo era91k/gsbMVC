@@ -32,7 +32,7 @@
 
         <p>
         <form class="final" method="POST" action="index.php?uc=suivifrais&mois=<?php echo $mois ?>visiteur=$visiteur">
-							<input class="valid" name="valide" type="submit" value="Imprimer">
+							<input class="valid" name="valide" type="submit" value="Valider">
 		</form>
         </p>
     </form>
