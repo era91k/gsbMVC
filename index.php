@@ -24,6 +24,10 @@ switch($uc){
 	case 'suivifrais' :{
 		include("controleurs/c_suivifrais.php");break;
 	}
+	case 'gestionPDF':{
+		$moisChoisi = $_GET['mois'];
+		include("controleurs/c_pdf.php");break;
+	}
 }
 include("vues/v_pied.php") ;
 ?>

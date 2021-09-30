@@ -38,7 +38,7 @@
              <tr>
                 <th class="date">Date</th>
                 <th class="libelle">Libellé</th>
-                <th class='montant'>Montant</th>                
+                <th class='montant'>Montant</th>               
              </tr>
         <?php      
           foreach ( $lesFraisHorsForfait as $unFraisHorsForfait ) 
@@ -56,6 +56,9 @@
           }
 		?>
     </table>
+    <form class="final" method="POST" action="index.php?uc=gestionPDF&mois=<?php echo $mois ?>">
+							<input class="valid" name="valide" type="submit" value="Imprimer">
+		</form>
   </div>
   </div>
  
