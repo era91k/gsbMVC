@@ -61,6 +61,17 @@ class PdoGsb{
 		$ligne = $rs->fetch();
 		return $ligne;
 	}
+/**
+ * Retourne le nom d'un Visiteur
+ 
+ * @return les noms sous la forme d'un tableau associatif 
+*/
+	public function getNomVisiteur(){
+		$req = "select Visiteur.nom as nom from Visiteur where Visiteur.role = 'visiteur'";
+		$rs = PdoGsb::$monPdo->query($req);
+		$ligne = $rs->fetchAll();
+		return $ligne;
+	}
 
 /**
  * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait

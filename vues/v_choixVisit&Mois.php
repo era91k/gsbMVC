@@ -5,12 +5,19 @@
             <label for="choix_bieres">Choisir le nom du visiteur :</label>
                     <input list="visiteur" type="text" id="choix_visiteur">
                     <datalist id="visiteur">
-                    <option value="Villechane">
-                    <option value="Cottin">
-                    <option value="Bioret">
-                    <option value="Bunisset">
-                    <option value="Andre">
+                    <?php foreach($noms as $nom){
+                            $lenom = $nom['nom'];
+                            
+                    ?>
+                    
+                        <option value=<?php echo $lenom; ?>>
+                    <?php
+                    }
+                    ?>
+
                     </datalist>
+
+
         </p>
 
         <p>
@@ -24,7 +31,8 @@
         </p>
 
         <p>
-            <input type="submit" value="Valider" name="valider">
-            <input type="reset" value="Annuler" name="annuler"> 
+        <form class="final" method="POST" action="index.php?uc=suivifrais&mois=<?php echo $mois ?>visiteur=$visiteur">
+							<input class="valid" name="valide" type="submit" value="Imprimer">
+		</form>
         </p>
     </form>
