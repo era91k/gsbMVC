@@ -1,10 +1,10 @@
 <div id="contenu">
     <h2>Validation des frais par le comptable</h2>
-    <form method="POST" action="index.php?uc=suivifrais">
+    <form method="POST" action="index.php?uc=suivifrais&action=voirFrais">
         <p>
             <label for="choixVisit">Choisir le nom du visiteur :</label>
-                    <input list="visiteur" type="text" id="choix_visiteur">
-                    <datalist id="visiteur">
+                    <input list="lstVisiteur" type="text" id="choix_visiteur" name="choix_visiteur">
+                    <datalist id="lstVisiteur" name="lstVisiteur">
                         <?php foreach($noms as $nom){
                                 $lenom = $nom['nom'];  
                                 if($lenom == $visitASelectionner){
@@ -48,8 +48,6 @@
         </p>
 
         <p>
-        <form class="final" method="POST" action="index.php?uc=suivifrais&mois=<?php echo $mois ?>visiteur=$visiteur">
-							<input class="valid" name="valide" type="submit" value="Valider">
-		</form>
+            <input id="ok" type="submit" value="Valider" size="20" />
         </p>
     </form>

@@ -334,5 +334,13 @@ class PdoGsb{
 		return $lesMois;
 
 	}
+
+	public function getIdVisiteur($nomVisiteur){
+		$req = "SELECT Visiteur.id FROM Visiteur WHERE nom = '$nomVisiteur';";
+		$res = PdoGsb::$monPdo->query($req);
+		$laLigne = $res->fetch();
+		$unId = $laLigne['id'];
+		return $unId;
+	}
 }
 ?>
