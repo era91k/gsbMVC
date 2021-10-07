@@ -56,7 +56,7 @@
           }
 		?>
     </table>
-    <form class="final" method="POST" action="index.php?uc=gestionPDF&mois=<?php echo $mois ?>">
+    <form class="final" method="POST" action="index.php?uc=gestionPDF&mois=<?php echo $leMois ?>">
 							<input class="valid" name="valide" type="submit" value="Imprimer">
 		</form>
   </div>
