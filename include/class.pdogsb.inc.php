@@ -61,6 +61,14 @@ class PdoGsb{
 		$ligne = $rs->fetch();
 		return $ligne;
 	}
+
+	public function getInfosVisiteurByNom($nom){
+		$req = "select Visiteur.id as id, Visiteur.nom as nom, Visiteur.prenom as prenom, Visiteur.role as role from Visiteur 
+		where Visiteur.nom = '$nom'";
+		$rs = PdoGsb::$monPdo->query($req);
+		$ligne = $rs->fetchAll();
+		return $ligne;
+	}
 /**
  * Retourne le nom d'un Visiteur
  
