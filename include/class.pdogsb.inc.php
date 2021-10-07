@@ -309,5 +309,30 @@ class PdoGsb{
 		where FicheFrais.idVisiteur ='$idVisiteur' and FicheFrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);
 	}
+
+/**
+ * Retourne tous les mois ou des fiches de frais sont renseignés
+ 
+ * @return un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant 
+*/
+	public function getLesMois(){
+		$req = "SELECT DISTINCT mois FROM FicheFrais ORDER BY mois;";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesMois =array();
+		$laLigne = $res->fetch();
+		while($laLigne != null)	{
+			$mois = $laLigne['mois'];
+			$numAnnee =substr( $mois,0,4);
+			$numMois =substr( $mois,4,2);
+			$lesMois["$mois"]=array(
+		     "mois"=>"$mois",
+		    "numAnnee"  => "$numAnnee",
+			"numMois"  => "$numMois"
+             );
+			$laLigne = $res->fetch(); 		
+		}
+		return $lesMois;
+
+	}
 }
 ?>

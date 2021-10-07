@@ -2,31 +2,48 @@
     <h2>Validation des frais par le comptable</h2>
     <form method="POST" action="index.php?uc=suivifrais">
         <p>
-            <label for="choix_bieres">Choisir le nom du visiteur :</label>
+            <label for="choixVisit">Choisir le nom du visiteur :</label>
                     <input list="visiteur" type="text" id="choix_visiteur">
                     <datalist id="visiteur">
-                    <?php foreach($noms as $nom){
-                            $lenom = $nom['nom'];
-                            
-                    ?>
-                    
-                        <option value=<?php echo $lenom; ?>>
-                    <?php
-                    }
-                    ?>
-
+                        <?php foreach($noms as $nom){
+                                $lenom = $nom['nom'];  
+                                if($lenom == $visitASelectionner){
+                        ?>
+                            <option selected value="<?php echo $lenom; ?>">
+                        <?php
+                        }
+                        else{ ?>
+                            <option value="<?php echo $mois; ?>">
+                        <?php
+                            }
+                        }
+                        ?>
                     </datalist>
-
-
         </p>
 
         <p>
         <label for="lstMois" accesskey="n">Mois : </label>
         <select id="lstMois" name="lstMois">
-            <option selected value="mois">09/21</option>  
-            <option  value="mois">10/21</option>  
-            <option  value="mois">11/21</option>  
-            <option value="mois">12/21</option>   
+            <?php
+			foreach ($lesMois as $unMois)
+			{
+			    $mois = $unMois['mois'];
+				$numAnnee =  $unMois['numAnnee'];
+				$numMois =  $unMois['numMois'];
+				if($mois == $moisASelectionner){
+				?>
+				<option selected value="<?php echo $mois ?>"><?php echo  $numMois."/".$numAnnee ?> </option>
+				<?php 
+				}
+				else{ ?>
+				<option value="<?php echo $mois ?>"><?php echo  $numMois."/".$numAnnee ?> </option>
+				<?php 
+				}
+			
+			}
+           
+		   ?>    
+            
         </select>
         </p>
 
