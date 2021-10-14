@@ -1,5 +1,12 @@
-<h2> Fiche de frais du mois <?php echo $numMois."-".$numAnnee?></h2>
+<h2> Fiche de frais du mois <?php echo $numMois."-".$numAnnee?> de <?php echo $leVisiteur ?></h2>
+<?php
+$test = count($lesFraisForfait);
+$test2 = count($lesFraisHorsForfait);
+?>
 <table class="listeLegere">
+    <?php
+        if($test==4){
+    ?>
     <caption>Eléments forfaitisés </caption>
     <tr>
         <?php
@@ -25,8 +32,18 @@
     ?>
         <td class="qteForfait">Vide</td>
     </tr>
+    <?php
+        }else{
+    ?>
+        <p> Pas de ligne de frais au forfait pour cet utilisateur à ce mois </p>
+    <?php
+        }
+    ?>
 </table>
 <table class="listeLegere">
+    <?php
+        if($test2 >= 1){
+    ?>
   	   <caption>Descriptif des éléments hors forfait :</caption>
              <tr>
                 <th class="date">Date</th>
@@ -49,5 +66,10 @@
              </tr>
         <?php 
           }
+        }else{
+        ?>
+        <p> Pas de ligne de frais hors forfait pour cet utilisateur à ce mois </p>
+        <?php
+        }
 		?>
     </table>

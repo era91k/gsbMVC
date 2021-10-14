@@ -18,7 +18,6 @@ switch($action){
         $noms = $pdo->getNomVisiteur();
         $lesClesVisit = array_keys($noms);
         $visitASelectionner = $lesClesVisit[0];
-        
         $lesMois = $pdo->getLesMois();
         $lesCles = array_keys($lesMois);
         $moisASelectionner = $lesCles[0];
