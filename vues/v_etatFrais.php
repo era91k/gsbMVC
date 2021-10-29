@@ -30,6 +30,7 @@
 		</tr>
     </table>
   	<table class="listeLegere">
+      <?php if(count($lesFraisHorsForfait) >= 1 ){ ?>
   	   <caption>Descriptif des éléments hors forfait -<?php echo $nbJustificatifs ?> justificatifs reçus -
        </caption>
              <tr>
@@ -53,9 +54,13 @@
           }
 		?>
     </table>
-    <form class="final" method="POST" action="index.php?uc=gestionPDF&mois=<?php echo $leMois ?>">
+    <?php } else{ ?>
+      <p>Aucun élément hors forfait n'a été saisi</p>
+    <?php } ?> 
+    <form class="final" method="POST" action="index.php?uc=gestionPDF&mois=<?php echo $leMois ?>" target="_blank">
 							<input class="valid" name="valide" type="submit" value="Imprimer">
 		</form>
+  
   </div>
   </div>
  

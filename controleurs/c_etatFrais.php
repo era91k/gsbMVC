@@ -8,9 +8,14 @@ switch($action){
 		// Afin de sélectionner par défaut le dernier mois dans la zone de liste
 		// on demande toutes les clés, et on prend la première,
 		// les mois étant triés décroissants
-		$lesCles = array_keys( $lesMois );
-		$moisASelectionner = $lesCles[0];
-		include("vues/v_listeMois.php");
+		if(count($lesMois) >= 1){
+			$lesCles = array_keys( $lesMois );
+			$moisASelectionner = $lesCles[0];
+			include("vues/v_listeMois.php");
+		} else { //Erreur si la liste des mois est inferieure à 1
+			ajouterErreur("Aucune fiche de frais n'a été renseignée");
+			include("vues/v_erreurs.php");
+		}
 		break;
 	}
 	case 'voirEtatFrais':{
@@ -30,7 +35,5 @@ switch($action){
 		$dateModif =  dateAnglaisVersFrancais($dateModif);
 		include("vues/v_etatFrais.php");
 	}
-
-
 }
 ?>
