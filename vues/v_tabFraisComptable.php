@@ -3,35 +3,39 @@
 $test = count($lesFraisForfait);
 $test2 = count($lesFraisHorsForfait);
 ?>
-<table class="listeLegere">
     <?php
         if($test==4){
     ?>
-    <caption>Eléments forfaitisés </caption>
-    <tr>
-        <?php
-        foreach ( $lesFraisForfait as $unFraisForfait ) 
-        {
-        $libelle = $unFraisForfait['libelle'];
-    ?>	
-        <th> <?php echo $libelle?></th>
-        <?php
-    }
-    ?>
-        <th>Situation</th>
-    </tr>
-    <tr>
-    <?php
-        foreach (  $lesFraisForfait as $unFraisForfait  ) 
-        {
-            $quantite = $unFraisForfait['quantite'];
-    ?>
-            <td class="qteForfait"><?php echo $quantite?> </td>
-        <?php
-        }
-    ?>
-        <td class="qteForfait">Vide</td>
-    </tr>
+      <form method="POST"  action="index.php?uc=gererFraisComptable&action=majFraisForfait&idVisiteur=<?php echo $idVisiteur; ?>&mois=<?php echo $leMois; ?>">
+      <div class="corpsForm">
+          
+          <fieldset>
+            <legend>Eléments forfaitisés
+            </legend>
+			<?php
+				foreach ($lesFraisForfait as $unFrais)
+				{
+					$idFrais = $unFrais['idfrais'];
+					$libelle = $unFrais['libelle'];
+					$quantite = $unFrais['quantite'];
+			?>
+					<p>
+						<label for="idFrais"><?php echo $libelle ?></label>
+						<input type="text" id="idFrais" name="lesFrais[<?php echo $idFrais?>]" size="10" maxlength="5" value="<?php echo $quantite?>" >
+					</p>
+			
+			<?php
+				}
+			?>
+          </fieldset>
+      </div>
+      <div class="piedForm">
+      <p>
+        <input id="ok" type="submit" value="Mettre à jour" size="20" />
+      </p> 
+      </div>
+        
+      </form>
     <?php
         }else{
     ?>
@@ -39,7 +43,6 @@ $test2 = count($lesFraisHorsForfait);
     <?php
         }
     ?>
-</table>
 <table class="listeLegere">
     <?php
         if($test2 >= 1){

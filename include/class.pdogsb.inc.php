@@ -350,5 +350,13 @@ class PdoGsb{
 		$unId = $laLigne['id'];
 		return $unId;
 	}
+
+	public function getNomVisiteurById($idVisiteur){
+		$req = "SELECT Visiteur.nom FROM Visiteur WHERE id = '$idVisiteur';";
+		$res = PdoGsb::$monPdo->query($req);
+		$laLigne = $res->fetch();
+		$unNom = $laLigne['nom'];
+		return $unNom;
+	}
 }
 ?>

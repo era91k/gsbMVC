@@ -187,6 +187,18 @@ function ajouterErreur($msg){
 	} 
    $_REQUEST['erreurs'][]=$msg;
 }
+
+/**
+ * Ajoute le libellé d'une notification au tableau des notifications
+ 
+ * @param $msg : le libellé de la notification
+ */
+function ajouterNotif($msg){
+	if (! isset($_REQUEST['notifs'])){
+	   $_REQUEST['notifs']=array();
+	 } 
+	$_REQUEST['notifs'][]=$msg;
+ }
 /**
  * Retoune le nombre de lignes du tableau des erreurs 
  

@@ -28,6 +28,9 @@ switch($uc){
 		$moisChoisi = $_GET['mois'];
 		include("controleurs/c_pdf.php");break;
 	}
+	case 'gererFraisComptable':{
+		include("controleurs/c_gererFraisComptable.php");break;
+	}
 }
 include("vues/v_pied.php") ;
 ?>
