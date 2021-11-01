@@ -3,7 +3,7 @@
     <form method="POST" action="index.php?uc=suivifrais&action=voirFrais">
         <p>
             <label for="choixVisit">Choisir le nom du visiteur :</label>
-                    <input list="lstVisiteur" type="text" id="choix_visiteur" name="choix_visiteur">
+                    <input list="lstVisiteur" type="text" id="choix_visiteur" name="choix_visiteur" required="required">
                     <datalist id="lstVisiteur" name="lstVisiteur">
                         <?php foreach($noms as $nom){
                                 $lenom = $nom['nom'];  

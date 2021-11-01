@@ -52,11 +52,12 @@ $test2 = count($lesFraisHorsForfait);
                 <th class="date">Date</th>
                 <th class="libelle">Libellé</th>
                 <th class='montant'>Montant</th>
-                <th class='situation'>Situation</th>               
+                <th class='situation'>Action</th>               
              </tr>
         <?php      
           foreach ( $lesFraisHorsForfait as $unFraisHorsForfait ) 
 		  {
+      $idFrais = $unFraisHorsForfait['id'];
 			$date = $unFraisHorsForfait['date'];
 			$libelle = $unFraisHorsForfait['libelle'];
 			$montant = $unFraisHorsForfait['montant'];
@@ -65,7 +66,15 @@ $test2 = count($lesFraisHorsForfait);
                 <td><?php echo $date ?></td>
                 <td><?php echo $libelle ?></td>
                 <td><?php echo $montant ?></td>
-                <td>Vide</td>
+                <td>
+                  <?php
+                  if(!$pdo->etatFraisHorsForfait($idFrais)){
+                  ?>
+                  <a href="index.php?uc=gererFraisComptable&action=supprimerFrais&idFrais=<?php echo $idFrais; ?>&idVisiteur=<?php echo $idVisiteur; ?>&mois=<?php echo $leMois; ?>" onclick="return confirm('Voulez-vous vraiment refuser ce frais ?');">Refuser</a>
+                  <?php
+                  }
+                  ?>
+                </td>
              </tr>
         <?php 
           }

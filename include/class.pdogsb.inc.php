@@ -358,5 +358,23 @@ class PdoGsb{
 		$unNom = $laLigne['nom'];
 		return $unNom;
 	}
+
+	public function etatFraisHorsForfait($idFrais){
+		$ok = false;
+		$req = "SELECT COUNT(*) AS nbhf FROM lignefraishorsforfait WHERE libelle LIKE 'REFUSE-%' AND id = '$idFrais';";
+		$rs = PdoGsb::$monPdo->query($req);
+		$ligne = $rs->fetch();
+		if($ligne['nbhf'] == 1){
+			$ok = true;
+		}
+		return $ok;
+	}
+
+	public function refuseFrais($idFrais){
+		$req = "UPDATE lignefraishorsforfait
+		SET libelle = CONCAT('REFUSE-',libelle)
+		WHERE id = '$idFrais';";
+		PdoGsb::$monPdo->exec($req);
+	}
 }
 ?>

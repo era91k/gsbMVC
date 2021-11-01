@@ -6,6 +6,10 @@ $leMois = $_REQUEST['mois'];
 $numAnnee =substr( $leMois,0,4);
 $numMois =substr( $leMois,4,2);
 switch($action){
+	case 'debutCampagneValidation':{
+
+	}
+
 	case 'majFraisForfait':{
 		$lesFrais = $_REQUEST['lesFrais'];
 		if(lesQteFraisValides($lesFrais)){
@@ -19,9 +23,10 @@ switch($action){
 		}
 	  break;
 	}
+
 	case 'supprimerFrais':{
 		$idFrais = $_REQUEST['idFrais'];
-	    $pdo->supprimerFraisHorsForfait($idFrais);
+	    $pdo->refuseFrais($idFrais);
 		break;
 	}
 }
