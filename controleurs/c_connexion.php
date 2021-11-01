@@ -1,4 +1,5 @@
 ﻿<?php
+$unMois = getMois(date("d/m/Y"));
 if(!isset($_REQUEST['action'])){
 	$_REQUEST['action'] = 'demandeConnexion';
 }
@@ -24,6 +25,12 @@ switch($action){
 			$role = $visiteur['role'];
 			connecter($id,$nom,$prenom,$role);
 			include("vues/v_sommaire.php");
+			if($role == "comptable"){
+				$unMois = getMois(date("d/m/Y"));
+				if($pdo->compteFicheNonCL($unMois) >= 1){
+					$pdo->ficheCRtoCL($unMois);
+				}
+			}
 		}
 		break;
 	}

@@ -319,12 +319,12 @@ class PdoGsb{
 	}
 
 /**
- * Retourne tous les mois ou des fiches de frais sont renseignés
+ * Retourne tous les mois ou il existe des fiches de frais cloturées
  
  * @return un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant 
 */
 	public function getLesMois(){
-		$req = "SELECT DISTINCT mois FROM FicheFrais ORDER BY mois;";
+		$req = "SELECT DISTINCT mois FROM FicheFrais WHERE idEtat = 'CL' ORDER BY mois;";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesMois =array();
 		$laLigne = $res->fetch();
@@ -374,6 +374,18 @@ class PdoGsb{
 		$req = "UPDATE lignefraishorsforfait
 		SET libelle = CONCAT('REFUSE-',libelle)
 		WHERE id = '$idFrais';";
+		PdoGsb::$monPdo->exec($req);
+	}
+
+	public function compteFicheNonCL($mois){
+		$req = "SELECT COUNT(*) AS nb FROM fichefrais WHERE idEtat = 'CR' AND mois < '$mois';";
+		$rs = PdoGsb::$monPdo->query($req);
+		$ligne = $rs->fetch();
+		return $ligne['nb'];
+	}
+
+	public function ficheCRtoCL($mois){
+		$req = "UPDATE fichefrais SET idEtat = 'CL' WHERE idEtat = 'CR' AND mois < '$mois';";
 		PdoGsb::$monPdo->exec($req);
 	}
 }

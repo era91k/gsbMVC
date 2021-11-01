@@ -6,10 +6,6 @@ $leMois = $_REQUEST['mois'];
 $numAnnee =substr( $leMois,0,4);
 $numMois =substr( $leMois,4,2);
 switch($action){
-	case 'debutCampagneValidation':{
-
-	}
-
 	case 'majFraisForfait':{
 		$lesFrais = $_REQUEST['lesFrais'];
 		if(lesQteFraisValides($lesFrais)){
@@ -28,6 +24,13 @@ switch($action){
 		$idFrais = $_REQUEST['idFrais'];
 	    $pdo->refuseFrais($idFrais);
 		break;
+	}
+
+	case 'majFicheFrais':{
+		$etat = $_REQUEST['etat'];
+		$pdo->majEtatFicheFrais($idVisiteur,$leMois,$etat);
+		ajouterNotif("La fiche frais a bien été validée");
+		include("vues/v_notifs.php");
 	}
 }
 
