@@ -51,3 +51,4 @@
             <input id="ok" type="submit" value="Valider" size="20" />
         </p>
     </form>
+    <hr>

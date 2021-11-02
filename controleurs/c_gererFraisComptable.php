@@ -27,8 +27,8 @@ switch($action){
 	}
 
 	case 'majFicheFrais':{
-		$etat = $_REQUEST['etat'];
-		$pdo->majEtatFicheFrais($idVisiteur,$leMois,$etat);
+		$montant = $_REQUEST['montant'];
+		$pdo->majValidFicheFrais($idVisiteur,$leMois,$montant);
 		ajouterNotif("La fiche frais a bien été validée");
 		include("vues/v_notifs.php");
 	}

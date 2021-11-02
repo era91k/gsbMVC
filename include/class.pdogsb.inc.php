@@ -318,6 +318,12 @@ class PdoGsb{
 		PdoGsb::$monPdo->exec($req);
 	}
 
+	public function majValidFicheFrais($idVisiteur,$mois,$montant){
+		$req = "UPDATE fichefrais SET idEtat = 'VA', dateModif = now(), montantValide = '$montant'
+		WHERE fichefrais.idVisiteur ='$idVisiteur' AND fichefrais.mois = '$mois';";
+		PdoGsb::$monPdo->exec($req);
+	}
+
 /**
  * Retourne tous les mois ou il existe des fiches de frais cloturées
  
@@ -388,5 +394,14 @@ class PdoGsb{
 		$req = "UPDATE fichefrais SET idEtat = 'CL' WHERE idEtat = 'CR' AND mois < '$mois';";
 		PdoGsb::$monPdo->exec($req);
 	}
+
+	public function getMontantFraisForfait($idFrais){
+		$req = "SELECT montant FROM fraisforfait WHERE id = '$idFrais';";
+		$res = PdoGsb::$monPdo->query($req);
+		$ligne = $res->fetch();
+		$unMontant = $ligne['montant'];
+		return $unMontant;
+	}
+
 }
 ?>

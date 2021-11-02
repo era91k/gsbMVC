@@ -25,11 +25,18 @@ switch($action){
         $leVisiteur = $_REQUEST['choix_visiteur'];
         $leMois = $_REQUEST['lstMois'];
         $idVisiteur = $pdo->getIdVisiteur($leVisiteur);
-        $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$leMois);
-        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$leMois);
-        $numAnnee =substr( $leMois,0,4);
-		$numMois =substr( $leMois,4,2);
-        include("vues/v_tabFraisComptable.php");
+        $ficheFrais = $pdo->getLesInfosFicheFrais($idVisiteur,$leMois);
+        $etatFiche = $ficheFrais['idEtat'];
+        if($etatFiche != 'VA' AND $etatFiche != 'RB'){
+            $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$leMois);
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$leMois);
+            $numAnnee =substr( $leMois,0,4);
+            $numMois =substr( $leMois,4,2);
+            include("vues/v_tabFraisComptable.php");
+        } else{
+            ajouterErreur("Fiche de frais déjà validée ou remboursée.");
+            include("vues/v_erreurs.php");
+        }
     }
 
 }
