@@ -34,6 +34,7 @@ switch($action){
 		$dateModif =  $lesInfosFicheFrais['dateModif'];
 		$dateModif =  dateAnglaisVersFrancais($dateModif);
 		include("vues/v_etatFrais.php");
+		break;
 	}
 }
 ?>

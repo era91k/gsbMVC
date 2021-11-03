@@ -437,6 +437,37 @@ class PdoGsb{
 		$unMontant = $ligne['montant'];
 		return $unMontant;
 	}
+/**
+ * Retourne les informations de toutes les fiches de frais validées
+ 
+ * @return un tableau associatif de frais avec des champs de jointure entre une fiche de frais et la ligne d'état 
+*/
+	public function getFichesValides(){
+		$req = "select fichefrais.idEtat as idEtat, fichefrais.dateModif as dateModif, fichefrais.nbJustificatifs as nbJustificatifs, fichefrais.montantValide as montantValide, fichefrais.idVisiteur as idVisiteur, fichefrais.mois as mois, etat.libelle as libEtat 
+		from fichefrais inner join etat on fichefrais.idEtat = etat.id where fichefrais.idEtat = 'VA'";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesFiches = array();
+		$laLigne = $res->fetch();
+		while($laLigne != null)	{
+			$idVisiteur = $laLigne['idVisiteur'];
+			$mois = $laLigne['mois'];
+			$nbJustificatifs = $laLigne['nbJustificatifs'];
+			$montantValide = $laLigne['montantValide'];
+			$dateModif = $laLigne['dateModif'];
+			$libEtat = $laLigne['libEtat'];
+			$numFiche = $idVisiteur.$mois;
+			$lesFiches["$numFiche"] = array(
+				"idVisiteur" => "$idVisiteur",
+				"mois" => "$mois",
+				"nbJustificatifs" => "$nbJustificatifs",
+				"montantValide" => "$montantValide",
+				"dateModif" => "$dateModif",
+				"libEtat" => "$libEtat"
+			);
+			$laLigne = $res->fetch(); 		
+		}
+		return $lesFiches;
+	}
 
 }
 ?>

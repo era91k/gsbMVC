@@ -17,33 +17,54 @@ switch($action){
 			ajouterErreur("Les valeurs des frais doivent être numériques");
 			include("vues/v_erreurs.php");
 		}
+		$lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$leMois);
+		$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$leMois);
+		$leVisiteur = $pdo->getNomVisiteurById($idVisiteur);
+		$noms = $pdo->getNomVisiteur();
+		$lesClesVisit = array_keys($noms);
+		$visitASelectionner = $lesClesVisit[0];
+		$lesMois = $pdo->getLesMois();
+		$lesCles = array_keys($lesMois);
+		$moisASelectionner = $lesCles[0];
+		include("vues/v_choixVisit&Mois.php");
+		include("vues/v_tabFraisComptable.php");
 	  break;
 	}
 
 	case 'supprimerFrais':{
 		$idFrais = $_REQUEST['idFrais'];
 	    $pdo->refuseFrais($idFrais);
+		$lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$leMois);
+		$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$leMois);
+		$leVisiteur = $pdo->getNomVisiteurById($idVisiteur);
+		$noms = $pdo->getNomVisiteur();
+		$lesClesVisit = array_keys($noms);
+		$visitASelectionner = $lesClesVisit[0];
+		$lesMois = $pdo->getLesMois();
+		$lesCles = array_keys($lesMois);
+		$moisASelectionner = $lesCles[0];
+		include("vues/v_choixVisit&Mois.php");
+		include("vues/v_tabFraisComptable.php");
 		break;
 	}
 
-	case 'majFicheFrais':{
+	case 'majValFicheFrais':{
 		$montant = $_REQUEST['montant'];
 		$pdo->majValidFicheFrais($idVisiteur,$leMois,$montant);
 		ajouterNotif("La fiche frais a bien été validée");
 		include("vues/v_notifs.php");
+		break;
+	}
+
+	case 'majRembFicheFrais':{
+		$etat = $_REQUEST['etat'];
+		$pdo->majEtatFicheFrais($idVisiteur,$leMois,$etat);
+		ajouterNotif("La fiche frais a bien été remboursée");
+		include("vues/v_notifs.php");
+		break;
 	}
 }
 
-$lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$leMois);
-$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$leMois);
-$leVisiteur = $pdo->getNomVisiteurById($idVisiteur);
-$noms = $pdo->getNomVisiteur();
-$lesClesVisit = array_keys($noms);
-$visitASelectionner = $lesClesVisit[0];
-$lesMois = $pdo->getLesMois();
-$lesCles = array_keys($lesMois);
-$moisASelectionner = $lesCles[0];
-include("vues/v_choixVisit&Mois.php");
-include("vues/v_tabFraisComptable.php");
+
 
 ?>

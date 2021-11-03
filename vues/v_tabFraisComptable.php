@@ -102,7 +102,7 @@
   <?php
   }
   ?>
-  <form method=POST action="index.php?uc=gererFraisComptable&action=majFicheFrais&idVisiteur=<?php echo $idVisiteur; ?>&mois=<?php echo $leMois; ?>&montant=<?php echo $total ?>">
+  <form method=POST action="index.php?uc=gererFraisComptable&action=majValFicheFrais&idVisiteur=<?php echo $idVisiteur; ?>&mois=<?php echo $leMois; ?>&montant=<?php echo $total ?>">
     <input id="ok" type="submit" value="Valider la fiche" size="20" />
   </form> 
   <?php

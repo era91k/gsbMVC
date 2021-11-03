@@ -37,6 +37,18 @@ switch($action){
             ajouterErreur("Fiche de frais déjà validée ou remboursée.");
             include("vues/v_erreurs.php");
         }
+        break;
+    }
+
+    case 'voirFicheValide':{
+        $lesFiches = $pdo->getFichesValides();
+        if(count($lesFiches) >= 1){
+            include("vues/v_remboursement.php");
+        }else{
+            ajouterErreur("Aucune fiche de frais validée disponible");
+            include("vues/v_erreurs.php");
+        }
+        break;
     }
 
 }
